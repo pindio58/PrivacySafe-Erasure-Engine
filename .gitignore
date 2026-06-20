@@ -1,3 +1,33 @@
 data
 logs
 venv
+.personal
+.env
+# Byte-compiled / optimized / DLL files
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+
+# Environment variable files (Very Important!)
+.env
+
+# IDE and Project-specific files
+.pytest_cache/
+.mypy_cache/
+.vscode/
+
+
+# Ignore the compilation folder
+**/__pycache__/
+
+# Ignore any loose compiled bytecode files
+*.pyc
+*.pyo
+*.pyd
