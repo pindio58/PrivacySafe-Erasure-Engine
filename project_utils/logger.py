@@ -38,6 +38,6 @@ def get_logger(name: str):
     console_handler.setFormatter(formatter)
 
     logger.addHandler(file_handler)
-    # logger.addHandler(console_handler)
+    logger.addHandler(console_handler)
 
     return logger
