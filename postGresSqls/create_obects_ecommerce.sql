@@ -17,16 +17,17 @@ CREATE TABLE ecommerce.products(
 -- user_id,first_name,last_name,email,phone,address_line1,city,state,pincode,country,created_at,deleted_at
 CREATE TABLE ecommerce.users(
     user_id uuid PRIMARY KEY,
-    first_name varchar(50) NOT NULL,
-    last_name varchar(50) NOT NULL,
+    first_name varchar(100) NOT NULL,
+    last_name varchar(100) NOT NULL,
     email varchar(255) NOT NULL UNIQUE,
-    phone varchar(20) NOT NULL,
+    phone varchar(100) NOT NULL,
     address_line1 varchar(255) NOT NULL,
     city varchar(100) NOT NULL,
     state varchar(50) NOT NULL,
     pincode varchar(10) NOT NULL,
     country varchar(50) NOT NULL DEFAULT 'India',
     created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    is_deleted boolean NOT NULL DEFAULT FALSE, -- Added boolean type with default value
     deleted_at timestamp with time zone, -- NULL means active; timestamp indicates soft-delete event
     -- Safety check constraint to ensure deletion timestamp isn't set in the past
     CONSTRAINT check_deleted_after_created CHECK (deleted_at IS NULL OR deleted_at >= created_at)
@@ -67,11 +68,6 @@ CREATE TABLE ecommerce.user_id_map(
     analytics_user_id uuid NOT NULL UNIQUE DEFAULT gen_random_uuid(),
     created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
-
-ALTER TABLE ecommerce.users
-    ALTER COLUMN first_name TYPE VARCHAR(64),
-    ALTER COLUMN last_name TYPE VARCHAR(64),
-    ALTER COLUMN phone TYPE VARCHAR(64);
 
 COMMIT;
 

@@ -30,6 +30,7 @@ except KeyError:
     logger.critical("Missing 'AUDIT_BUCKET' key in your .env file!")
     raise
 
+HASH_SALT_REGISTRY=os.environ['HASH_SALT_REGISTRY']
 hash_to_be_used = secrets.token_urlsafe(32)
 
 # Setup dynamic paths pointing to project_root/data/
@@ -41,7 +42,7 @@ s3: S3Client = boto3.client('s3')
 
 def push_salt_to_s3(filename: str):
     """Uploads the generated cryptographically secure salt token to AWS S3."""
-    key = f"hash_salt_registry/{filename}" if filename.endswith('.txt') else f"hash_salt_registry/{filename}.txt"
+    key = f"{HASH_SALT_REGISTRY}/{filename}" if filename.endswith('.txt') else f"{HASH_SALT_REGISTRY}/{filename}.txt"
     
     logger.info(f"Initiating S3 upload. Target path: s3://{AUDIT_BUCKET}/{key}")
     

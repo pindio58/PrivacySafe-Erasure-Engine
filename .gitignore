@@ -31,3 +31,8 @@ ENV/
 *.pyc
 *.pyo
 *.pyd
+
+
+# shared layer
+shared_layer
+.DS_Store
